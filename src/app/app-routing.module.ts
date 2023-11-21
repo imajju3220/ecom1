@@ -4,12 +4,12 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [
-  {path:'products', component:ProductsComponent},
-  {path:'checkout', component:CheckoutComponent}
+  { path: '', component: ProductsComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

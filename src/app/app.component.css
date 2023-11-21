@@ -1,1 +1,9 @@
 a{cursor: pointer;}
+.navbar-nav{
+    .dropdown:hover{
+        .dropdown-menu{
+            display: block;
+            left: -80px;
+        }
+    }
+}

@@ -25,7 +25,7 @@ export class AppComponent {
     UserPassword: '',
   };
 
-  loggedObj: any;
+  loggedObj: any = {};
 
   //here constructor is required to use ProductService only
   constructor(private productSrv: ProductService) {
@@ -40,6 +40,7 @@ export class AppComponent {
     this.productSrv.register(this.registerObj).subscribe((res: any) => {
       if (res.result) {
         alert('user created');
+        this.isRegisterVisible = false;
       } else {
         alert(res.message);
       }
@@ -50,7 +51,10 @@ export class AppComponent {
     this.productSrv.login(this.loginObj).subscribe((res: any) => {
       if (res.result) {
         alert('login successful');
-        localStorage.setItem('amazon user', JSON.stringify(res.data));
+        //debugger;
+        this.loggedObj = res.data;
+        localStorage.setItem('amazon_user', JSON.stringify(res.data));
+        this.isLoginVisible = false;
       } else {
         alert(res.message);
       }
