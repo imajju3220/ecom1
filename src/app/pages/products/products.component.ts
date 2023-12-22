@@ -10,7 +10,16 @@ export class ProductsComponent implements OnInit {
   productsArray: any[] = [];
   categories: any[] = [];
   selectedCategory: number = 0;
-  constructor(private productSrv: ProductService) {}
+  //this is for add to cart
+  loggedObj: any = {};
+  constructor(private productSrv: ProductService) {
+    //this is for add to cart
+    const localData = localStorage.getItem('amazon_user');
+    if (localData != null) {
+      const parseObj = JSON.parse(localData);
+      this.loggedObj = parseObj;
+    }
+  }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -39,5 +48,24 @@ export class ProductsComponent implements OnInit {
         console.log(res.data);
         this.productsArray = res.data;
       });
+  }
+
+  addtoCart(productId: number) {
+    //debugger;
+    const obj = {
+      CartId: 0,
+      CustId: 0,
+      ProductId: productId,
+      Quantity: 1,
+      AddedDate: new Date(),
+    };
+    this.productSrv.addtoCart(obj).subscribe((res: any) => {
+      if (res.result) {
+        alert('product added to cart');
+        debugger;
+      } else {
+        alert(res.message);
+      }
+    });
   }
 }

@@ -33,8 +33,14 @@ export class AppComponent {
     if (localData != null) {
       const parseObj = JSON.parse(localData);
       this.loggedObj = parseObj;
+      //this is for add to cart
+      //this.getCartData(this.loggedObj.CustId);
     }
   }
+  //this is for add to cart
+  // getCartData(id: number) {
+  //   this.productSrv.getAddtocartdataByCust().subscribe((res: any) => {});
+  // }
 
   onRegister() {
     this.productSrv.register(this.registerObj).subscribe((res: any) => {

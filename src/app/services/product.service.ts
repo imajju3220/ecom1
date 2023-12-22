@@ -40,4 +40,18 @@ export class ProductService {
       obj
     );
   }
+
+  addtoCart(obj: any): Observable<any> {
+    return this.http.post<any>(
+      'https://freeapi.miniprojectideas.com/api/amazon/AddToCart',
+      obj
+    );
+  }
+
+  // getAddtocartdataByCust(id: number): Observable<any> {
+  //   return this.http.get<any[]>(
+  //     'https://freeapi.miniprojectideas.com/api/amazon/GetCartProductsByCustomerId?id=' +
+  //       id
+  //   );
+  // }
 }

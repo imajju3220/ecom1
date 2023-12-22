@@ -15,7 +15,7 @@
         <div class="card-body">
           <h5 class="card-title">{{product.productShortName}}</h5>
           <p   class="card-text">$ {{product.productPrice}}</p>
-          <a href="#" class="btn btn-primary">add to cart</a>
+          <button class="btn btn-primary" (click)="addtoCart(product.productId)">add to cart</button>
         </div>
       </div>
 </div>
