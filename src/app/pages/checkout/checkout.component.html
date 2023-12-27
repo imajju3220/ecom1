@@ -1,1 +1,60 @@
-<p>checkout works!</p>
+<div class="row">
+    <section class="col-7">
+        <div class="row mb-3"><h4>Billing address</h4></div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <input type="text" placeholder="city" [(ngModel)]="checkoutObj.DeliveryCity" class="form-control">
+            </div>
+            <div class="col-6">
+                <input type="text" placeholder="Pincode" [(ngModel)]="checkoutObj.DeliveryPinCode" class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <textarea placeholder="Address Line 1" [(ngModel)]="checkoutObj.DeliveryAddress1" class="form-control" name="" id="" cols="30" rows="3"></textarea>
+            </div>
+            <div class="col-6">
+                <textarea placeholder="Address Line 2" [(ngModel)]="checkoutObj.DeliveryAddress2" class="form-control" name="" id="" cols="30" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <textarea placeholder="Landmark" [(ngModel)]="checkoutObj.DeliveryLandMark" class="form-control" name="" id="" cols="30" rows="3"></textarea>
+            </div>
+            <div class="col-6">
+                
+            </div>
+        </div>
+    </section>
+    <section class="col-5">
+        <div class="row mb-3"><h4>Your Order</h4></div>
+        <div class="row">
+            <ul class="dropdown-menu dropdown-menu-dark bg-white d-block position-static">
+<ng-container *ngIf="cartItems.length != 0">
+     <li *ngFor="let item of cartItems">
+    <div class="w-100 d-flex align-items-center border-bottom justify-content-between px-4">
+      <div class="w-25">
+        <img class="w-100" [src]="item.productImageUrl" alt="">
+      </div>
+      <div class="w-50">
+        <a href="" class="text-decoration-none text-dark"><p class="m-0 p-0">{{item.productName | slice:0-5}}</p></a>
+
+        <a href="" class="text-decoration-none text-dark"><p class="m-0 p-0">1 x $ {{item.productPrice}}</p></a>
+      </div>
+    </div>
+    </li>
+</ng-container>
+   <li>
+    <div class="w-100 d-flex align-items-center border-bottom justify-content-center px-4">
+        <h5 class="text-dark">Total : $ 500</h5>
+    </div>
+   </li>
+   <li>
+    <div class="w-100 d-flex align-items-center border-bottom justify-content-between px-4">
+        <button class="btn btn-dark w-100" (click)="placeOrder()">PLace Order</button>
+    </div>
+   </li>
+            </ul>
+        </div>
+    </section>
+</div>

@@ -26,6 +26,7 @@ export class AppComponent {
   };
 
   loggedObj: any = {};
+  cartItems: any = [];
 
   //here constructor is required to use ProductService only
   constructor(private productSrv: ProductService) {
@@ -34,13 +35,24 @@ export class AppComponent {
       const parseObj = JSON.parse(localData);
       this.loggedObj = parseObj;
       //this is for add to cart
-      //this.getCartData(this.loggedObj.CustId);
+      //debugger;
+      this.getCartData(this.loggedObj.custId);
     }
+
+    //this is for add to cart
+    this.productSrv.cartUpdated.subscribe((res: boolean) => {
+      if (res) {
+        this.getCartData(this.loggedObj.custId);
+      }
+    });
   }
+
   //this is for add to cart
-  // getCartData(id: number) {
-  //   this.productSrv.getAddtocartdataByCust().subscribe((res: any) => {});
-  // }
+  getCartData(id: number) {
+    this.productSrv.getAddtocartdataByCust(id).subscribe((res: any) => {
+      this.cartItems = res.data;
+    });
+  }
 
   onRegister() {
     this.productSrv.register(this.registerObj).subscribe((res: any) => {
@@ -61,6 +73,17 @@ export class AppComponent {
         this.loggedObj = res.data;
         localStorage.setItem('amazon_user', JSON.stringify(res.data));
         this.isLoginVisible = false;
+      } else {
+        alert(res.message);
+      }
+    });
+  }
+  //this is for add to cart
+  removeItem(cartId: number) {
+    this.productSrv.removeProductFromCart(cartId).subscribe((res: any) => {
+      if (res.result) {
+        alert('item removed');
+        this.getCartData(this.loggedObj.custId);
       } else {
         alert(res.message);
       }

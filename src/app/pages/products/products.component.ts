@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit {
     //debugger;
     const obj = {
       CartId: 0,
-      CustId: 0,
+      CustId: this.loggedObj.custId,
       ProductId: productId,
       Quantity: 1,
       AddedDate: new Date(),
@@ -62,7 +62,8 @@ export class ProductsComponent implements OnInit {
     this.productSrv.addtoCart(obj).subscribe((res: any) => {
       if (res.result) {
         alert('product added to cart');
-        debugger;
+        //this is for cart
+        this.productSrv.cartUpdated.next(true);
       } else {
         alert(res.message);
       }
